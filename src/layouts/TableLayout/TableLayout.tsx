@@ -1,21 +1,19 @@
-import "./App.scss";
+import "./TableLayout.scss";
 import { useState } from 'react';
-// import Select from 'react-select';
 import uniq from 'lodash/uniq';
-import Table from '../Table';
-import FilterBar from '../FilterBar';
-import Search from '../Search';
-import Multiselect from '../Multiselect'
+import Table from '../../components/Table';
+import FilterBar from '../../components/FilterBar';
+import Search from '../../components/Search';
+import Multiselect from '../../components/Multiselect'
 import { peopleRows, peopleColumns, songRows, songColumns } from './data';
 import type { IFilter } from '../../interfaces';
 import { FILTER_TYPES } from '../../util';
 
 
-function App() {
+function TableLayout() {
   const [personSearch, setPersonSearch] = useState('');
   const [songSearch, setSongSearch] = useState('');
   const [countryFilters, setCountryFilters] = useState<string[]>([]);
-  // const [countryFilters, setCountryFilters] = useState([]);
   const peopleFilters: IFilter[] = [
     {
       type: FILTER_TYPES.SEARCH,
@@ -49,12 +47,12 @@ function App() {
   ];
 
   return (
-    <div className="App">
+    <div className="TableLayout">
         <FilterBar>
           <Search label="Search People" search={personSearch} placeholder="Name" setSearch={setPersonSearch} />
           <Multiselect options={countryOptions} placeholder="Filter by Country" onChange={handleCountrySelectChange}/>
         </FilterBar>
-        <div className="App__container">
+        <div className="TableLayout__container">
           <Table 
             rows={peopleRows} 
             columns={peopleColumns} 
@@ -66,7 +64,7 @@ function App() {
         <FilterBar>
           <Search label="Search Songs" search={songSearch} placeholder="Name" setSearch={setSongSearch} />
         </FilterBar>
-        <div className="App__container">
+        <div className="TableLayout__container">
           <Table
             rows={songRows}
             columns={songColumns}
@@ -79,4 +77,4 @@ function App() {
   );
 }
 
-export default App;
+export default TableLayout;

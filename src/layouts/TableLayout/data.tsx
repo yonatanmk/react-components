@@ -1,6 +1,6 @@
 import type { IPerson, ITableColumn, ISong } from '../../interfaces'
-import LinkCell from '../LinkCell'
-import CheckmarkCell from '../CheckmarkCell'
+import LinkCell from '../../components/LinkCell'
+import CheckmarkCell from '../../components/CheckmarkCell'
 
 const booleanSortFunctionGenerator = (field: string) => (row: any) =>{ // FIX TS
   if (row?.[field]?.props?.affirmative === true) return 1;
