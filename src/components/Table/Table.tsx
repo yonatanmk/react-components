@@ -46,8 +46,6 @@ function Table<T extends object>({ className, rows, columns, defaultSortPredicat
   }, {
   } as Partial<ITableHeaderRow>) as ITableHeaderRow;
 
-  console.log(headerRow)
-
   return (
     <table className={classnames("table", className)}>
       <thead>

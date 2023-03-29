@@ -32,8 +32,6 @@ function TableLayout() {
   }));
 
   const handleCountrySelectChange = (selected: { label: string, value: string }[]) => {
-    console.log('handleCountrySelectChange')
-    console.log(selected)
     setCountryFilters(selected.map(option => option.value))
   }
 

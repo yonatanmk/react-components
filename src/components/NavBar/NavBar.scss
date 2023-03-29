@@ -1,0 +1,27 @@
+@import "../../styles/variables/_palette";
+
+.NavBar {
+  background-color: #C03221;
+  height: 4rem;
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: center;
+
+  &__Back {
+    background-color: transparent;
+    padding: 0;
+    bordeR: none;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+}
