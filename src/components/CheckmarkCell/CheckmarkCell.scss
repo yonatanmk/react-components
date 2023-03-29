@@ -1,0 +1,20 @@
+@import "../../styles/variables/_palette";
+
+.CheckmarkCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    height: 1.125rem;
+    width: 2rem;
+  }
+
+  &__affirmative {
+    color: $success-green;
+  }
+
+  &__negative {
+    color: $failed-red;
+  }
+}

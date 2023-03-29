@@ -1,0 +1,17 @@
+@import "../../styles/variables/_palette";
+@import "../../styles/variables/_mixins";
+
+.Search {
+  display: flex;
+  align-items: center;
+
+  input {
+    @include input;
+  }
+  
+  label {
+    color: $table-header-gray;
+    margin-right: 1rem;
+    font-size: 24px;
+  }
+}
