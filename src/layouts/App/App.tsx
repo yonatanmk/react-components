@@ -6,9 +6,9 @@ function App() {
     <div className="App">
       <div className="App__Container">
         <Link className="App__Link" to={`table`}>Table</Link>
+        <Link className="App__Link" to={`redux`}>Redux</Link>
         <Link className="App__Link" to={`table`}>Table</Link>
-        <Link className="App__Link" to={`table`}>Table</Link>
-        <Link className="App__Link" to={`table`}>Table</Link>
+        <Link className="App__Link" to={`redux`}>Redux</Link>
       </div>
     </div>
   );

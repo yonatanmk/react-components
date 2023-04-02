@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar'
 import App from '../layouts/App';
 import Error from '../layouts/Error';
 import TableLayout from '../layouts/TableLayout';
+import ReduxLayout from '../layouts/ReduxLayout';
 
 const routes: RouteObject[] = [
   {
@@ -17,6 +18,11 @@ const routes: RouteObject[] = [
       {
         path: "/table",
         element: <TableLayout />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/redux",
+        element: <ReduxLayout />,
         errorElement: <Error />,
       },
     ]
