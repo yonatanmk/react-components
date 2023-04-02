@@ -11,9 +11,9 @@ export type IHeaderCellProps = {
 };
 
 function HeaderCell({ name, field }: IHeaderCellProps) {
-  const { sortPredicate, setSortPredicate, sortOrder, setSortOrder } = useContext(TableSortContext);
+  const { sortField, setSortField, sortOrder, setSortOrder } = useContext(TableSortContext);
 
-  const isSorted = field === sortPredicate;
+  const isSorted = field === sortField;
   const ArrowIcon = sortOrder === SORT_ORDERS.ASC ? BsArrowDown : BsArrowUp;
 
 
@@ -25,7 +25,7 @@ function HeaderCell({ name, field }: IHeaderCellProps) {
     if (isSorted) {
       toggleSortOrder()
     } else {
-      setSortPredicate(field)
+      setSortField(field)
       setSortOrder(SORT_ORDERS.ASC)
     }
   }

@@ -54,8 +54,8 @@ function TableLayout() {
           <Table 
             rows={peopleRows} 
             columns={peopleColumns} 
-            defaultSortPredicate="name" 
-            backupSortPredicate="name"
+            defaultSortField="name" 
+            backupSortField="name"
             filters={peopleFilters}
           />
         </div>
@@ -66,8 +66,8 @@ function TableLayout() {
           <Table
             rows={songRows}
             columns={songColumns}
-            defaultSortPredicate="name"
-            backupSortPredicate="name"
+            defaultSortField="name"
+            backupSortField="name"
             filters={songFilters}
           />
         </div>

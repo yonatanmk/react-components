@@ -13,13 +13,13 @@ interface ITableProps<T> {
   // rows: T[];
   rows: any[];
   columns: ITableColumn<T>[];
-  defaultSortPredicate: string;
-  backupSortPredicate: string;
+  defaultSortField: string;
+  backupSortField: string;
   filters?: IFilter[];
 };
 
-function Table<T extends object>({ className, rows, columns, defaultSortPredicate, backupSortPredicate, filters }: ITableProps<T>) {
-  const [sortPredicate, setSortPredicate] = useState(defaultSortPredicate || columns[0]?.name,);
+function Table<T extends object>({ className, rows, columns, defaultSortField, backupSortField, filters }: ITableProps<T>) {
+  const [sortField, setSortField] = useState(defaultSortField || columns[0]?.name,);
   const [sortOrder, setSortOrder] = useState(SORT_ORDERS.ASC as ISortOrder);
   const sortedColumns = [...columns].sort((a, b) => a.index > b.index ? 1 : -1);
   const headerColumns = sortedColumns.map(col => ({
@@ -29,9 +29,9 @@ function Table<T extends object>({ className, rows, columns, defaultSortPredicat
 
   const filteredRows = filters && filters.length > 0 ? filterRows(rows, filters)  : rows;
 
-  const sortByColumn = columns.find(col => col.field === sortPredicate) as ITableColumn<T>;
-  const sortByFunction = sortByColumn.sortByFunction || sortPredicate; // default to field value if there's no sort by function
-  const sortedRows = orderBy(filteredRows, [sortByFunction, defaultSortPredicate || backupSortPredicate], [sortOrder, sortOrder]);
+  const sortByColumn = columns.find(col => col.field === sortField) as ITableColumn<T>;
+  const sortByFunction = sortByColumn.sortByFunction || sortField; // default to field value if there's no sort by function
+  const sortedRows = orderBy(filteredRows, [sortByFunction, defaultSortField || backupSortField], [sortOrder, sortOrder]);
 
   const headerRow = columns.reduce((agg: Partial<ITableHeaderRow>, col) => {
     return {
@@ -49,7 +49,7 @@ function Table<T extends object>({ className, rows, columns, defaultSortPredicat
   return (
     <table className={classnames("table", className)}>
       <thead>
-        <TableSortContext.Provider value={{ sortPredicate, setSortPredicate, sortOrder, setSortOrder }}>
+        <TableSortContext.Provider value={{ sortField, setSortField, sortOrder, setSortOrder }}>
           <Row className="row__header" row={headerRow} columns={headerColumns} isHeader/>
         </TableSortContext.Provider>
       </thead>

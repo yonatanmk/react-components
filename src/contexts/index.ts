@@ -4,17 +4,17 @@ import { SORT_ORDERS } from '../util'
 import type { ISortOrder } from '../interfaces'
 
 // interface ITableSortContext {
-//   sortPredicate: string;
+//   sortField: string;
 //   sortOrder: ISortOrder;
-//   setSortPredicate: React.Dispatch<React.SetStateAction<string>>;
+//   setSortField: React.Dispatch<React.SetStateAction<string>>;
 //   setSortOrder: React.Dispatch<React.SetStateAction<ISortOrder>>;
 // }
 
 // export const TableSortContext = createContext<ITableSortContext>({ ... })
 
 export const TableSortContext = createContext({
-  sortPredicate: 'name',
+  sortField: 'name',
   sortOrder: SORT_ORDERS.ASC as ISortOrder,
-  setSortPredicate: (() => {}) as React.Dispatch<React.SetStateAction<string>>,
+  setSortField: (() => {}) as React.Dispatch<React.SetStateAction<string>>,
   setSortOrder: (() => {}) as React.Dispatch<React.SetStateAction<ISortOrder>>,
 });

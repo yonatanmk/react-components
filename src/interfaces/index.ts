@@ -20,12 +20,12 @@ export interface ISong {
 }
 
 export interface ITableHeaderRow extends IPerson {
-  // sortPredicate?: string;
+  // sortField?: string;
   // sortOrder?: ISortOrder;
 }
 
 // export interface ITableRow extends IPerson {
-//   sortPredicate?: string;
+//   sortField?: string;
 //   sortOrder?: ISortOrder;
 // }
 
