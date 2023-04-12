@@ -10,28 +10,33 @@ export type IAutocompleteProps = {
 
 const Autocomplete: React.FC<IAutocompleteProps> = ({ value: inputValue, onChange, fetchSuggestions }) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggCache, setSuggCache] = useState<{[key: string]: string[]}>({})
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<number>(-1);
   const [loading, setLoading] = useState<boolean>(false);
   const valueRef = useRef(inputValue);
 
-  const debouncedFetchSuggestions = useCallback(debounce(async (value: string) => {
+  const debouncedFetchSuggestions = useCallback(debounce(async () => {
+    if (suggCache[valueRef.current]) return;
     if (valueRef.current) {
       setLoading(true);
-      const suggestions = await fetchSuggestions(value);
+      const suggestions = await fetchSuggestions(valueRef.current);
       setSuggestions(suggestions);
+      setSuggCache(prev => ({...prev, [valueRef.current]: suggestions }))
       setLoading(false);
     }
-  }, 500), [fetchSuggestions]);
+  }, 500), [fetchSuggestions, suggCache, setLoading, setSuggestions, setSuggCache]);
 
   useEffect(() => {
-    if (valueRef.current) {
-      console.log('INPUT VALUE: ' + inputValue)
-      debouncedFetchSuggestions(inputValue);
-    } else {
+    if (!valueRef.current) {
       setSuggestions([]);
       setLoading(false);
+    } else if (suggCache[valueRef.current]) {
+      setSuggestions(suggCache[valueRef.current]);
+      setLoading(false);
+    } else {
+      debouncedFetchSuggestions();
     }
-  }, [inputValue, debouncedFetchSuggestions]);
+  }, [inputValue, suggCache, debouncedFetchSuggestions]);
 
   const handleInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
