@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ReactQueryLayout.scss'
 import { useQuery, QueryClient, QueryClientProvider } from 'react-query';
 
@@ -22,16 +22,18 @@ const fetchPokemon = async (): Promise<Pokemon[]> => {
 };
 
 function ReactQueryLayout() {
-  const { data, isLoading, error } = useQuery<Pokemon[]>(
+  const { data, error, refetch, isFetching } = useQuery<Pokemon[]>(
     'pokemon',
     fetchPokemon, {
       refetchOnWindowFocus: false, // default: true
     }
   );
 
-  console.log(data)
+  const handleFetchNewPokemon = () => {
+    refetch()
+  };
 
-  if (isLoading) {
+  if (isFetching) {
     return <p>Loading...</p>;
   }
 
@@ -42,6 +44,7 @@ function ReactQueryLayout() {
   return (
     <div className="ReactQueryLayout">
       <h1>Random Pokemon</h1>
+      <button onClick={handleFetchNewPokemon}>Fetch New Pokemon</button>
       <ul className="ReactQueryLayout__List">
         {data?.map(pokemon => (
           <li key={pokemon.id}>
