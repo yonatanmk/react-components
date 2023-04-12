@@ -7,6 +7,21 @@
     padding: 5px;
   }
 
+  &__Loading {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 10rem;
+    box-sizing: border-box;
+  }
+
   &__Suggestions {
     position: absolute;
     top: 100%;

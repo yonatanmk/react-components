@@ -1,31 +1,46 @@
 import "./Autocomplete.scss";
-import React, { useState, useEffect, KeyboardEvent } from 'react';
+import React, { useState, useEffect, useCallback, useRef, KeyboardEvent } from 'react';
+import { debounce } from 'lodash';
 
 export type IAutocompleteProps = {
   value: string;
   onChange: (val: string) => void;
-  fetchSuggestions: (val: string) => Promise<string[]>;
+  fetchSuggestions: (val: string) => string[] | Promise<string[]>;
 };
 
 const Autocomplete: React.FC<IAutocompleteProps> = ({ value: inputValue, onChange, fetchSuggestions }) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<number>(-1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const valueRef = useRef(inputValue);
+
+  const debouncedFetchSuggestions = useCallback(debounce(async (value: string) => {
+    if (valueRef.current) {
+      setLoading(true);
+      const suggestions = await fetchSuggestions(value);
+      setSuggestions(suggestions);
+      setLoading(false);
+    }
+  }, 500), [fetchSuggestions]);
 
   useEffect(() => {
-    const getSuggestions = async () => {
-      const suggestions = await fetchSuggestions(inputValue);
-      setSuggestions(suggestions);
-    };
-
-    getSuggestions();
-  }, [inputValue, fetchSuggestions]);
+    if (valueRef.current) {
+      console.log('INPUT VALUE: ' + inputValue)
+      debouncedFetchSuggestions(inputValue);
+    } else {
+      setSuggestions([]);
+      setLoading(false);
+    }
+  }, [inputValue, debouncedFetchSuggestions]);
 
   const handleInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
+    valueRef.current = value;
     onChange(value);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
+    valueRef.current = suggestion;
     onChange(suggestion);
     setSuggestions([]);
     setSelectedSuggestionIndex(-1);
@@ -37,6 +52,7 @@ const Autocomplete: React.FC<IAutocompleteProps> = ({ value: inputValue, onChang
     } else if (event.key === 'ArrowDown' && selectedSuggestionIndex < suggestions.length - 1) {
       setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
     } else if (event.key === 'Enter' && selectedSuggestionIndex !== -1) {
+      valueRef.current = suggestions[selectedSuggestionIndex]
       onChange(suggestions[selectedSuggestionIndex]);
       setSuggestions([]);
       setSelectedSuggestionIndex(-1);
@@ -51,7 +67,8 @@ const Autocomplete: React.FC<IAutocompleteProps> = ({ value: inputValue, onChang
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
-      {suggestions.length > 0 && (
+      {loading && <div className="Autocomplete__Loading">Loading...</div>}
+      {!loading && suggestions.length > 0 && inputValue.length > 0 && (
         <ul className="Autocomplete__Suggestions">
           {suggestions.map((suggestion, index) => (
             <li
