@@ -4,6 +4,7 @@ import App from '../layouts/App';
 import Error from '../layouts/Error';
 import TableLayout from '../layouts/TableLayout';
 import ReduxLayout from '../layouts/ReduxLayout';
+import AutocompleteLayout from '../layouts/AutocompleteLayout';
 
 const routes: RouteObject[] = [
   {
@@ -23,6 +24,11 @@ const routes: RouteObject[] = [
       {
         path: "/redux",
         element: <ReduxLayout />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/autocomplete",
+        element: <AutocompleteLayout />,
         errorElement: <Error />,
       },
     ]
