@@ -1,0 +1,11 @@
+.ReactQueryLayout {
+  padding: 2rem;
+  &__List {
+    list-style: none;
+
+    li h2 {
+      text-transform: capitalize;
+      margin: 0.25rem;
+    }
+  }
+}

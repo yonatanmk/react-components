@@ -5,6 +5,7 @@ import Error from '../layouts/Error';
 import TableLayout from '../layouts/TableLayout';
 import ReduxLayout from '../layouts/ReduxLayout';
 import AutocompleteLayout from '../layouts/AutocompleteLayout';
+import ReactQueryLayout from '../layouts/ReactQueryLayout';
 
 const routes: RouteObject[] = [
   {
@@ -29,6 +30,11 @@ const routes: RouteObject[] = [
       {
         path: "/autocomplete",
         element: <AutocompleteLayout />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/react-query",
+        element: <ReactQueryLayout />,
         errorElement: <Error />,
       },
     ]

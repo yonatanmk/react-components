@@ -8,6 +8,7 @@ function App() {
         <Link className="App__Link" to={`table`}>Table</Link>
         <Link className="App__Link" to={`redux`}>Redux</Link>
         <Link className="App__Link" to={`autocomplete`}>Autocomplete</Link>
+        <Link className="App__Link" to={`react-query`}>React Query</Link>
       </div>
     </div>
   );
