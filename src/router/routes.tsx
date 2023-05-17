@@ -7,6 +7,7 @@ import ReduxLayout from '../layouts/ReduxLayout';
 import AutocompleteLayout from '../layouts/AutocompleteLayout';
 import ReactQueryLayout from '../layouts/ReactQueryLayout';
 import MultipartForm from '../layouts/MultipartForm';
+import XStateTodo from '../layouts/XStateTodo';
 
 const routes: RouteObject[] = [
   {
@@ -41,6 +42,11 @@ const routes: RouteObject[] = [
       {
         path: "/multipart-form",
         element: <MultipartForm />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/xstate-todo",
+        element: <XStateTodo />,
         errorElement: <Error />,
       },
     ]
