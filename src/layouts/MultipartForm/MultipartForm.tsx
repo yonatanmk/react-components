@@ -9,7 +9,7 @@ function MultipartForm() {
   })
   const [count, setCount] = useState(1)
 
-  const updateForm = (e: any) => {
+  const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
