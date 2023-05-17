@@ -15,17 +15,20 @@ function MultipartForm() {
       [e.target.name]: e.target.value,
     })
   }
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(
+      `Submitted Email: ${form.email} Name: ${form.name} Password: ${form.password}`
+    )
+  }
   return (
     <div className="MultipartForm">
       <h1>Multi-part Form</h1>
       <h1>Step {count} of 3</h1>
       <form
         className="col-4 form"
-        onSubmit={() =>
-          alert(
-            `Submitted Email: ${form.email} Name: ${form.name} Password: ${form.password}`
-          )
-        }
+        onSubmit={onSubmit}
       >
         {count === 1 ? (
           <div className="form-group">
@@ -64,7 +67,7 @@ function MultipartForm() {
           </div>
         ) : null}
         {count === 3 ? (
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-primary MultipartForm__button" type="submit">
             Submit
           </button>
         ) : null}
