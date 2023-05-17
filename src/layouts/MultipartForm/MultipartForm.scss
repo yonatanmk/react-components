@@ -1,0 +1,14 @@
+.MultipartForm {
+  text-align: center;
+  display: flex;
+  margin-top: 50px;
+  display: block;
+
+  .form {
+    margin: auto;
+  }
+
+  &__button {
+    margin: 20px;
+  }
+}

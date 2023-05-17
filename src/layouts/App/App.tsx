@@ -9,6 +9,9 @@ function App() {
         <Link className="App__Link" to={`redux`}>Redux</Link>
         <Link className="App__Link" to={`autocomplete`}>Autocomplete</Link>
         <Link className="App__Link" to={`react-query`}>React Query</Link>
+        <Link className="App__Link" to={`multipart-form`}>Multi-part Form</Link>
+
+        
       </div>
     </div>
   );

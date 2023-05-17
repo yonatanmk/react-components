@@ -6,6 +6,7 @@ import TableLayout from '../layouts/TableLayout';
 import ReduxLayout from '../layouts/ReduxLayout';
 import AutocompleteLayout from '../layouts/AutocompleteLayout';
 import ReactQueryLayout from '../layouts/ReactQueryLayout';
+import MultipartForm from '../layouts/MultipartForm';
 
 const routes: RouteObject[] = [
   {
@@ -35,6 +36,11 @@ const routes: RouteObject[] = [
       {
         path: "/react-query",
         element: <ReactQueryLayout />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/multipart-form",
+        element: <MultipartForm />,
         errorElement: <Error />,
       },
     ]
