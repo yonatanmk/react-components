@@ -33,18 +33,15 @@ function Table<T extends object>({ className, rows, columns, defaultSortField, b
   const sortByFunction = sortByColumn.sortByFunction || sortField; // default to field value if there's no sort by function
   const sortedRows = orderBy(filteredRows, [sortByFunction, defaultSortField || backupSortField], [sortOrder, sortOrder]);
 
-  const headerRow = columns.reduce((agg: Partial<ITableHeaderRow>, col) => {
-    return {
-      ...agg,
-      [col.field]: {
-        props: {
-          name: col.name,
-          field: col.field,
-        }
-      },
-    }
-  }, {
-  } as Partial<ITableHeaderRow>) as ITableHeaderRow;
+  const headerRow = columns.reduce((agg: Partial<ITableHeaderRow>, col) => ({
+    ...agg,
+    [col.field]: {
+      props: {
+        name: col.name,
+        field: col.field,
+      }
+    },
+  }), {} as Partial<ITableHeaderRow>) as ITableHeaderRow;
 
   return (
     <table className={classnames("table", className)}>
